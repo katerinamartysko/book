@@ -10,6 +10,7 @@
     "@types/node": "^16.18.2",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "json-server": "^0.17.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -17,6 +18,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "start:server": "json-server --watch db.json --port 8000",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
