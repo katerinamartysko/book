@@ -244,8 +244,8 @@
         }
       },
       {
-      "id": 12,
-      "general": {
+        "id": 12,
+        "general": {
           "firstName": "Nicolette",
           "lastName": "Rogahn",
           "avatar": "https://randomuser.me/api/portraits/women/79.jpg"
@@ -310,8 +310,8 @@
         }
       },
       {
-      "id": 15,
-      "general": {
+        "id": 15,
+        "general": {
           "firstName": "Malika",
           "lastName": "Feeney",
           "avatar": "https://randomuser.me/api/portraits/women/87.jpg"
