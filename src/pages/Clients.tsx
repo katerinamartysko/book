@@ -1,31 +1,39 @@
 import React from 'react';
-import { List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
+import { Divider, List, ListItem, ListItemText, ListSubheader } from '@mui/material';
 import '../App.css';
+
 const Clients = () => {
+  const style = {
+    width: '100%',
+    maxWidth: 360,
+    bgcolor: 'background.paper',
+  };
   return (
     <div className="root">
       <List
-        sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+        sx={style}
         component="nav"
-        aria-labelledby="nested-list-subheader"
+        aria-label="mailbox folders"
         subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            Nested List Items
+          <ListSubheader component="div" id="сustomer-information">
+            Phone book
           </ListSubheader>
         }
       >
-        <ListItemButton>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Sent mail" />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon></ListItemIcon>
+        <ListItem>
           <ListItemText primary="Inbox" />
-        </ListItemButton>
+        </ListItem>
+        <Divider />
+        <ListItem divider>
+          <ListItemText primary="Drafts" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Trash" />
+        </ListItem>
+        <Divider light />
+        <ListItem>
+          <ListItemText primary="Spam" />
+        </ListItem>
       </List>
     </div>
   );
