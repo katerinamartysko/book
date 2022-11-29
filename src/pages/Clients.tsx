@@ -1,40 +1,41 @@
-import React from 'react';
-import { Divider, List, ListItem, ListItemText, ListSubheader } from '@mui/material';
+import React, { Fragment } from 'react';
+import { Breadcrumbs, Divider, List, ListItem, ListItemText, ListSubheader } from '@mui/material';
 import '../App.css';
+import { useSelector } from 'react-redux';
+import { State } from '../store/store';
+
+const style = {
+  width: '100%',
+  maxWidth: 360,
+  bgcolor: 'background.paper',
+};
 
 const Clients = () => {
-  const style = {
-    width: '100%',
-    maxWidth: 360,
-    bgcolor: 'background.paper',
-  };
+  const clients = useSelector((state: State) => state.clients.clients);
+
   return (
     <div className="root">
-      <List
-        sx={style}
-        component="nav"
-        aria-label="mailbox folders"
-        subheader={
-          <ListSubheader component="div" id="сustomer-information">
-            Phone book
-          </ListSubheader>
-        }
-      >
-        <ListItem>
-          <ListItemText primary="Inbox" />
-        </ListItem>
-        <Divider />
-        <ListItem divider>
-          <ListItemText primary="Drafts" />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="Trash" />
-        </ListItem>
-        <Divider light />
-        <ListItem>
-          <ListItemText primary="Spam" />
-        </ListItem>
-      </List>
+      <Breadcrumbs aria-label="breadcrumb">
+        <List
+          sx={style}
+          component="nav"
+          aria-label="mailbox folders"
+          subheader={
+            <ListSubheader component="div" id="сustomer-information">
+              Phone book
+            </ListSubheader>
+          }
+        >
+          {clients.map(client => (
+            <Fragment key={client.id}>
+              <ListItem>
+                <ListItemText primary={client.general.firstName} secondary={client.general.lastName} />
+              </ListItem>
+              <Divider />
+            </Fragment>
+          ))}
+        </List>
+      </Breadcrumbs>
     </div>
   );
 };
