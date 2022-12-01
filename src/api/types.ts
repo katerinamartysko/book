@@ -1,4 +1,4 @@
-interface General {
+export interface General {
   firstName: string;
   lastName: string;
   avatar: string;
@@ -17,7 +17,7 @@ interface Address {
   zipCode: string;
   country: string;
 }
-export interface Clients {
+export interface Client {
   id: number;
   job: Job;
   general: General;
