@@ -462,5 +462,175 @@
         "country": "Israel"
       }
     }
+  ],
+  "clientsList": [
+    {
+      "id": 1,
+      "general": {
+        "firstName": "Liana",
+        "lastName": "Crooks",
+        "avatar": "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+      }
+    },
+    {
+      "id": 2,
+      "general": {
+        "firstName": "Deontae",
+        "lastName": "Dare",
+        "avatar": "https://randomuser.me/api/portraits/men/86.jpg"
+      }
+    },
+    {
+      "id": 3,
+      "general": {
+        "firstName": "Cortez",
+        "lastName": "Pacocha",
+        "avatar": "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg"
+      }
+    },
+    {
+      "id": 4,
+      "general": {
+        "firstName": "Geoffrey",
+        "lastName": "Russel",
+        "avatar": "https://randomuser.me/api/portraits/men/97.jpg"
+      }
+    },
+    {
+      "id": 5,
+      "general": {
+        "firstName": "Christian",
+        "lastName": "Wuckert",
+        "avatar": "https://randomuser.me/api/portraits/men/36.jpg"
+      }
+    },
+    {
+      "id": 6,
+      "general": {
+        "firstName": "Joana",
+        "lastName": "Breitenberg",
+        "avatar": "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+      }
+    },
+    {
+      "id": 7,
+      "general": {
+        "firstName": "Elton",
+        "lastName": "Pfannerstill",
+        "avatar": "https://randomuser.me/api/portraits/men/16.jpg"
+      }
+    },
+    {
+      "id": 8,
+      "general": {
+        "firstName": "Alvena",
+        "lastName": "Paucek",
+        "avatar": "https://randomuser.me/api/portraits/women/30.jpg"
+      }
+    },
+    {
+      "id": 9,
+      "general": {
+        "firstName": "Lew",
+        "lastName": "Daniel",
+        "avatar": "https://randomuser.me/api/portraits/men/22.jpg"
+      }
+    },
+    {
+      "id": 10,
+      "general": {
+        "firstName": "Darlene",
+        "lastName": "Davis",
+        "avatar": "https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e"
+      }
+    },
+    {
+      "id": 11,
+      "general": {
+        "firstName": "Savannah",
+        "lastName": "Predovic",
+        "avatar": "https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+      }
+    },
+    {
+      "id": 12,
+      "general": {
+        "firstName": "Nicolette",
+        "lastName": "Rogahn",
+        "avatar": "https://randomuser.me/api/portraits/women/79.jpg"
+      }
+    },
+    {
+      "id": 13,
+      "general": {
+        "firstName": "Aidan",
+        "lastName": "Stracke",
+        "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
+      }
+    },
+    {
+      "id": 14,
+      "general": {
+        "firstName": "Tristin",
+        "lastName": "Eichmann",
+        "avatar": "https://randomuser.me/api/portraits/men/52.jpg"
+      }
+    },
+    {
+      "id": 15,
+      "general": {
+        "firstName": "Malika",
+        "lastName": "Feeney",
+        "avatar": "https://randomuser.me/api/portraits/women/87.jpg"
+      }
+    },
+    {
+      "id": 16,
+      "general": {
+        "firstName": "Ross",
+        "lastName": "Dickens",
+        "avatar": "https://randomuser.me/api/portraits/men/46.jpg"
+      }
+    },
+    {
+      "id": 17,
+      "general": {
+        "firstName": "Granville",
+        "lastName": "Larson",
+        "avatar": "https://randomuser.me/api/portraits/women/33.jpg"
+      }
+    },
+    {
+      "id": 18,
+      "general": {
+        "firstName": "Donnie",
+        "lastName": "Macejkovic",
+        "avatar": "https://randomuser.me/api/portraits/women/63.jpg"
+      }
+    },
+    {
+      "id": 19,
+      "general": {
+        "firstName": "Estell",
+        "lastName": "Baumbach",
+        "avatar": "https://randomuser.me/api/portraits/men/12.jpg"
+      }
+    },
+    {
+      "id": 20,
+      "general": {
+        "firstName": "Amelie",
+        "lastName": "Bradtke",
+        "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=046c29138c1335ef8edee7daf521ba50"
+      }
+    },
+    {
+      "id": 21,
+      "general": {
+        "firstName": "Elmer",
+        "lastName": "D'Amore",
+        "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
+      }
+    }
   ]
 }
