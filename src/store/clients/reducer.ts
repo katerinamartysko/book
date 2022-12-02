@@ -1,24 +1,33 @@
-import { GetClientsAction } from './actions';
-import { Client } from '../../api/types';
+import { GetClientsAction, GetClientsIdAction } from './actions';
+import { Client, ClientList } from '../../api/types';
 import c from './constants';
 
-type ClientsActions = GetClientsAction
+type ClientsActions = GetClientsAction | GetClientsIdAction;
 
 interface ClientsState {
-  clients: Array<Client>;
+  clientsList: Array<ClientList>;
+  currentClient: Client | null;
 }
 
 const INITIAL_STATE: ClientsState = {
-  clients: []
+  clientsList: [],
+  currentClient: null,
 };
 
 export const clientsReducer = (state = INITIAL_STATE, action: ClientsActions): ClientsState => {
   switch (action.type) {
-    case c.GET_CLIENTS: {
-      const clients = action.payload;
+    case c.GET_CLIENTS_LIST: {
+      const clientsList = action.payload;
       return {
         ...state,
-        clients: [...state.clients, ...clients],
+        clientsList: [...state.clientsList, ...clientsList],
+      };
+    }
+    case c.GET_CLIENT_ID: {
+      const currentClient = action.payload;
+      return {
+        ...state,
+        currentClient,
       };
     }
 
