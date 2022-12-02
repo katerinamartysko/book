@@ -7,6 +7,6 @@ interface ResponseClients {
 
 export default class PostService {
   static getClients(): Promise<ResponseClients> {
-    return axios.get('http://localhost:8000/clients');
+    return axios.get(`${process.env.REACT_APP_CLIENTS}/clients`);
   }
 }
