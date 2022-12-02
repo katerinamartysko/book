@@ -1,13 +1,13 @@
 import React from 'react';
-import './App.css';
 import Clients from './pages/Clients';
+import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Clients />
     </div>
   );
-}
+};
 
 export default App;

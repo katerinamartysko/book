@@ -17,10 +17,12 @@ interface Address {
   zipCode: string;
   country: string;
 }
-export interface Client {
+export interface ClientList {
   id: number;
-  job: Job;
   general: General;
+}
+export interface Client extends ClientList {
+  job: Job;
   contact: Contact;
   address: Address;
 }
