@@ -1,7 +1,8 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Breadcrumbs, Divider, List, ListItem, ListItemText, ListSubheader } from '@mui/material';
-import { getClients } from '../store/clients/actions';
+import { Breadcrumbs, Divider, List, ListItemButton, ListItemText, ListSubheader } from '@mui/material';
+import { getClientsList } from '../store/clients/actions';
+import { ClientsId } from '../components/ClientsId';
 import { useFetching } from '../hooks/useFetching';
 import PostService from '../api/PostServise';
 import { State } from '../store/store';
@@ -15,11 +16,12 @@ const style = {
 
 const Clients = () => {
   const dispatch = useDispatch();
-  const clients = useSelector((state: State) => state.clients.clients);
+  const clients = useSelector((state: State) => state.clients.clientsList);
+  const [clientID, setClientID] = useState<number | null>(null);
 
   const [fetchClients] = useFetching(async () => {
     const response = await PostService.getClients();
-    dispatch(getClients(response.data));
+    dispatch(getClientsList(response.data));
   });
 
   useEffect(() => {
@@ -41,14 +43,16 @@ const Clients = () => {
         >
           {clients.map(client => (
             <Fragment key={client.id}>
-              <ListItem>
+              <ListItemButton onClick={() => setClientID(client.id)}>
                 <ListItemText primary={client.general.firstName} secondary={client.general.lastName} />
-              </ListItem>
+              </ListItemButton>
               <Divider />
             </Fragment>
           ))}
         </List>
       </Breadcrumbs>
+
+      <ClientsId clientID={clientID} />
     </div>
   );
 };
