@@ -11,6 +11,7 @@ interface Props {
 
 export const ClientsId: FC<Props> = ({ clientID }) => {
   const dispatch = useDispatch();
+  const isNoClientID = clientID === null;
 
   const [fetchClientsById] = useFetching(async (id: number) => {
     const response = await PostService.getClientId(id);
@@ -18,11 +19,11 @@ export const ClientsId: FC<Props> = ({ clientID }) => {
   });
 
   useEffect(() => {
-    if (clientID === null) return;
+    if (isNoClientID) return;
     fetchClientsById(clientID);
   }, [clientID]);
 
-  if (clientID === null) return null;
+  if (isNoClientID) return null;
 
   return (
     <div>
