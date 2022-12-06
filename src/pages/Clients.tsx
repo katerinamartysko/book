@@ -6,16 +6,22 @@ import { ClientsId } from '../components/ClientsId';
 import { useFetching } from '../hooks/useFetching';
 import PostService from '../api/PostServise';
 import { State } from '../store/store';
+import { makeStyles } from 'tss-react/mui';
 import '../App.css';
 
-const style = {
-  width: '100%',
-  maxWidth: 360,
-  bgcolor: 'background.paper',
-};
+const useStyles = makeStyles()(() => ({
+  list: {
+    width: '100%',
+  },
+  listText: {
+    display: 'inline',
+  },
+}));
 
 const Clients = () => {
   const dispatch = useDispatch();
+  const { classes } = useStyles();
+
   const clients = useSelector((state: State) => state.clients.clientsList);
   const [clientID, setClientID] = useState<number | null>(null);
 
@@ -32,7 +38,7 @@ const Clients = () => {
     <div className="root">
       <Breadcrumbs aria-label="breadcrumb">
         <List
-          sx={style}
+          className={classes.list}
           component="nav"
           aria-label="mailbox folders"
           subheader={
@@ -42,12 +48,15 @@ const Clients = () => {
           }
         >
           {clients.map(client => (
-            <Fragment key={client.id}>
-              <ListItemButton onClick={() => setClientID(client.id)}>
-                <ListItemText primary={client.general.firstName} secondary={client.general.lastName} />
-              </ListItemButton>
-              <Divider />
-            </Fragment>
+            <div key={client.id} className={classes.listText}>
+              <Fragment>
+                <ListItemButton onClick={() => setClientID(client.id)}>
+                  <ListItemText primary={client.general.firstName} />
+                  <ListItemText primary={client.general.lastName} />
+                </ListItemButton>
+                <Divider />
+              </Fragment>
+            </div>
           ))}
         </List>
       </Breadcrumbs>
