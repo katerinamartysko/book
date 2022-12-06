@@ -28,7 +28,12 @@ export const ClientsId: FC<Props> = ({ clientID }) => {
   return (
     <div>
       <Typography>{clientID}</Typography>
-      <Typography>{client.general.firstName}</Typography>
+      <Typography>
+        {client.general.firstName} {client.general.lastName} <br />
+        {'Job:'} {client.job.company} {client.job.title} <br />
+        {'Address:'}
+        {client.address.country} {client.address.city} {client.address.street} {client.address.zipCode}
+      </Typography>
     </div>
   );
 };
