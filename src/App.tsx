@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Clients from './pages/Clients';
-import './App.css';
 
-const App = () => {
+const App: FC = () => {
   return (
     <div className="App">
       <Clients />
