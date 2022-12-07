@@ -1,7 +1,8 @@
-import React, { FC, Fragment, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
 import {
+  Avatar,
   Box,
   Breadcrumbs,
   CircularProgress,
@@ -15,16 +16,22 @@ import { useFetching } from '../hooks/useFetching';
 import PostService from '../api/PostServise';
 import { getClientsList } from '../store/clients/actions';
 import { State } from '../store/store';
+import { theme } from '../utils/them';
 
 const useStyles = makeStyles()(() => ({
   list: {
-    width: '100%',
-  },
-  listText: {
-    display: 'inline',
+    display: 'flex',
+    flexDirection: 'row',
   },
   load: {
     justifyContent: 'center',
+  },
+  avatar: {
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+  },
+  divider: {
+    marginLeft: theme.spacing(5),
   },
 }));
 
@@ -51,7 +58,6 @@ const ClientsList: FC<Props> = ({ setClientID }) => {
       <div>
         <Breadcrumbs aria-label="breadcrumb">
           <List
-            className={classes.list}
             component="nav"
             aria-label="mailbox folders"
             subheader={
@@ -61,14 +67,15 @@ const ClientsList: FC<Props> = ({ setClientID }) => {
             }
           >
             {clients.map(client => (
-              <div key={client.id} className={classes.listText}>
-                <Fragment>
+              <div key={client.id}>
+                <div className={classes.list}>
+                  <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar} />
                   <ListItemButton onClick={() => setClientID(client.id)}>
                     <ListItemText primary={client.general.firstName} />
                     <ListItemText primary={client.general.lastName} />
                   </ListItemButton>
-                  <Divider />
-                </Fragment>
+                </div>
+                <Divider className={classes.divider} />
               </div>
             ))}
           </List>
