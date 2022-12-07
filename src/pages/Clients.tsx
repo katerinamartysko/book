@@ -1,6 +1,15 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Breadcrumbs, Divider, List, ListItemButton, ListItemText, ListSubheader } from '@mui/material';
+import {
+  Box,
+  Breadcrumbs,
+  CircularProgress,
+  Divider,
+  List,
+  ListItemButton,
+  ListItemText,
+  ListSubheader,
+} from '@mui/material';
 import { getClientsList } from '../store/clients/actions';
 import { ClientsId } from '../components/ClientsId';
 import { useFetching } from '../hooks/useFetching';
@@ -16,6 +25,9 @@ const useStyles = makeStyles()(() => ({
   listText: {
     display: 'inline',
   },
+  load: {
+    justifyContent: 'center',
+  },
 }));
 
 const Clients = () => {
@@ -25,7 +37,7 @@ const Clients = () => {
   const clients = useSelector((state: State) => state.clients.clientsList);
   const [clientID, setClientID] = useState<number | null>(null);
 
-  const [fetchClients] = useFetching(async () => {
+  const [fetchClients, isClientsLoading, clientError] = useFetching(async () => {
     const response = await PostService.getClients();
     dispatch(getClientsList(response.data));
   });
@@ -35,7 +47,7 @@ const Clients = () => {
   }, []);
 
   return (
-    <div className="root">
+    <div>
       <Breadcrumbs aria-label="breadcrumb">
         <List
           className={classes.list}
@@ -60,8 +72,16 @@ const Clients = () => {
           ))}
         </List>
       </Breadcrumbs>
+      {clientError && <h1 className="error">Произошла ошибка {clientError}</h1>}
 
-      <ClientsId clientID={clientID} />
+      {isClientsLoading && (
+        <Box sx={{ display: 'flex' }}>
+          <CircularProgress className={classes.load} />
+        </Box>
+      )}
+      <div>
+        <ClientsId clientID={clientID} />
+      </div>
     </div>
   );
 };

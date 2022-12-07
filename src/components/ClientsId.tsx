@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import PostService from '../api/PostServise';
 import { useFetching } from '../hooks/useFetching';
 import { getClientId } from '../store/clients/actions';
@@ -14,7 +14,7 @@ export const ClientsId: FC<Props> = ({ clientID }) => {
   const dispatch = useDispatch();
   const client = useSelector((state: State) => state.clients.currentClient);
 
-  const [fetchClientsById] = useFetching(async (id: number) => {
+  const [fetchClientsById, isClientIdLoading, clientIdError] = useFetching(async (id: number) => {
     const response = await PostService.getClientId(id);
     dispatch(getClientId(response.data));
   });
@@ -34,6 +34,13 @@ export const ClientsId: FC<Props> = ({ clientID }) => {
         {'Address:'}
         {client.address.country} {client.address.city} {client.address.street} {client.address.zipCode}
       </Typography>
+
+      {clientIdError && <h1 className="error">Произошла ошибка {clientIdError}</h1>}
+      {isClientIdLoading && (
+        <Box sx={{ display: 'flex' }}>
+          <CircularProgress />
+        </Box>
+      )}
     </div>
   );
 };
