@@ -12,7 +12,7 @@ import {
   ListItemText,
   ListSubheader,
 } from '@mui/material';
-import { useFetching } from '../hooks/useFetching';
+import { useFetching } from '../hooks';
 import PostService from '../api/PostServise';
 import { getClientsList } from '../store/clients/actions';
 import { State } from '../store/store';
