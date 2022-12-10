@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
 import {
   Avatar,
-  Box,
   Breadcrumbs,
   CircularProgress,
   Divider,
@@ -58,6 +57,8 @@ const ClientsList: FC<Props> = ({ setClientID }) => {
     fetchClients();
   }, []);
 
+  if (isClientsLoading) return <CircularProgress className={classes.load} />;
+  if (clientError) return <h1 className="error">Произошла ошибка {clientError}</h1>;
   if (!clients.length) return <h1> No clients found </h1>;
   return (
     <div>
@@ -84,13 +85,6 @@ const ClientsList: FC<Props> = ({ setClientID }) => {
           </List>
         </Breadcrumbs>
       </div>
-      {clientError && <h1 className="error">Произошла ошибка {clientError}</h1>}
-
-      {isClientsLoading && (
-        <Box>
-          <CircularProgress className={classes.load} />
-        </Box>
-      )}
     </div>
   );
 };
