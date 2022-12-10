@@ -1,8 +1,7 @@
 import React, { FC, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 import { AppTheme } from './utils/them';
-import ClientsList from './components/ClientsList';
-import { ClientId } from './components/ClientId';
+import { ClientsList, ClientId } from './components';
 
 const useStyles = makeStyles()((theme: AppTheme) => ({
   root: {

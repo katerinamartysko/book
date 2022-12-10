@@ -39,7 +39,7 @@ interface Props {
   setClientID: (clientID: number | null) => void;
 }
 
-const ClientsList: FC<Props> = ({ setClientID }) => {
+export const ClientsList: FC<Props> = ({ setClientID }) => {
   const dispatch = useDispatch();
   const { classes } = useStyles();
 
@@ -88,5 +88,3 @@ const ClientsList: FC<Props> = ({ setClientID }) => {
     </div>
   );
 };
-
-export default ClientsList;
