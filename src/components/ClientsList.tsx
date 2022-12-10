@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
 import {
@@ -12,11 +12,12 @@ import {
   ListItemText,
   ListSubheader,
 } from '@mui/material';
-import { useFetching } from '../hooks';
+import { useClients, useFetching } from '../hooks';
 import PostService from '../api/PostServise';
 import { getClientsList } from '../store/clients/actions';
 import { State } from '../store/store';
 import { theme } from '../utils/them';
+import { Search } from './Search';
 
 const useStyles = makeStyles()(() => ({
   list: {
@@ -44,6 +45,9 @@ const ClientsList: FC<Props> = ({ setClientID }) => {
   const { classes } = useStyles();
 
   const clients = useSelector((state: State) => state.clients.clientsList);
+  const [search, setSearch] = useState<string | null>(null);
+
+  const searchClients = useClients(clients, search);
 
   const [fetchClients, isClientsLoading, clientError] = useFetching(async () => {
     const response = await PostService.getClients();
@@ -53,20 +57,19 @@ const ClientsList: FC<Props> = ({ setClientID }) => {
   useEffect(() => {
     fetchClients();
   }, []);
+
+  if (!clients.length) return <h1> No clients found </h1>;
   return (
     <div>
+      <Search search={search} setSearch={setSearch} />
       <div>
         <Breadcrumbs aria-label="breadcrumb">
           <List
             component="nav"
             aria-label="mailbox folders"
-            subheader={
-              <ListSubheader component="div" id="сustomer-information">
-                Phone book
-              </ListSubheader>
-            }
+            subheader={<ListSubheader component="div">Phone book</ListSubheader>}
           >
-            {clients.map(client => (
+            {searchClients.map(client => (
               <div key={client.id}>
                 <div className={classes.list}>
                   <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar} />
@@ -84,7 +87,7 @@ const ClientsList: FC<Props> = ({ setClientID }) => {
       {clientError && <h1 className="error">Произошла ошибка {clientError}</h1>}
 
       {isClientsLoading && (
-        <Box sx={{ display: 'flex' }}>
+        <Box>
           <CircularProgress className={classes.load} />
         </Box>
       )}
