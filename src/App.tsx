@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 import { AppTheme } from './utils/them';
-import { ClientsList, ClientId } from './components';
+import { ClientsListContainer, ClientId } from './components';
 
 const useStyles = makeStyles()((theme: AppTheme) => ({
   root: {
@@ -22,7 +22,7 @@ const App: FC = () => {
   return (
     <div className={classes.root}>
       <div>
-        <ClientsList setClientID={setClientID} />
+        <ClientsListContainer setClientID={setClientID} />
       </div>
       <div className={classes.clientId}>
         <ClientId clientID={clientID} />
