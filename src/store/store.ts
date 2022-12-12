@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { clientsReducer } from './clients/reducer';
 
 const rootReducer = combineReducers({
-  clients: clientsReducer,
+  clientsReducer,
 });
 
 export const store = configureStore({
