@@ -1,5 +1,5 @@
 import { createSelector, Selector } from 'reselect';
-import { ClientList } from '../../api/types';
+import { Client, ClientList } from '../../api/types';
 import { State } from '../store';
 
 export const selectSearch = (state: State): string | null => state.clientsReducer.search;
@@ -16,3 +16,5 @@ export const selectClientsList: Selector<State, Array<ClientList>> = createSelec
     );
   }
 );
+
+export const selectClientId = (state: State): Client | null => state.clientsReducer.currentClient;
