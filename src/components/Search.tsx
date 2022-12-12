@@ -3,10 +3,10 @@ import { TextField } from '@mui/material';
 
 interface Props {
   search: string | null;
-  setSearch: (filter: string | null) => void;
+  onSearch: (filter: string) => void;
 }
 
-export const Search: FC<Props> = ({ search, setSearch }) => {
+export const Search: FC<Props> = ({ search, onSearch }) => {
   const filter = search === null ? '' : search;
   return (
     <div>
@@ -15,7 +15,7 @@ export const Search: FC<Props> = ({ search, setSearch }) => {
         label="Поиск..."
         variant="outlined"
         value={filter}
-        onChange={event => setSearch(event.target.value)}
+        onChange={event => onSearch(event.target.value)}
       />
     </div>
   );
