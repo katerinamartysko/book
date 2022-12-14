@@ -16,10 +16,10 @@ const useStyles = makeStyles()(() => ({
 }));
 
 interface Props {
-  setClientID: (clientID: number | null) => void;
+  onSetClientID: (clientID: number) => void;
 }
 
-export const ClientsListContainer: FC<Props> = ({ setClientID }) => {
+export const ClientsListContainer: FC<Props> = ({ onSetClientID }) => {
   const dispatch = useDispatch();
   const { classes } = useStyles();
 
@@ -44,7 +44,7 @@ export const ClientsListContainer: FC<Props> = ({ setClientID }) => {
   return (
     <div>
       <Search search={search} onSearch={handelSearch} />
-      <ClientList clients={clients} setClientID={setClientID} />
+      <ClientList clients={clients} onSetClientID={onSetClientID} />
     </div>
   );
 };
