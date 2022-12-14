@@ -6,7 +6,7 @@ import { ClientList as IClientList } from '../api/types';
 
 interface Props {
   clients: Array<IClientList>;
-  setClientID: (clientID: number | null) => void;
+  onSetClientID: (clientID: number) => void;
 }
 
 const useStyles = makeStyles()(() => ({
@@ -26,8 +26,9 @@ const useStyles = makeStyles()(() => ({
   },
 }));
 
-export const ClientList: FC<Props> = ({ clients, setClientID }) => {
+export const ClientList: FC<Props> = ({ clients, onSetClientID }) => {
   const { classes } = useStyles();
+
   if (!clients.length) return <h1> No clients found </h1>;
   return (
     <div>
@@ -41,7 +42,7 @@ export const ClientList: FC<Props> = ({ clients, setClientID }) => {
             <div key={client.id}>
               <div className={classes.list}>
                 <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar} />
-                <ListItemButton onClick={() => setClientID(client.id)}>
+                <ListItemButton onClick={() => onSetClientID(client.id)}>
                   <ListItemText primary={client.general.firstName} />
                   <ListItemText primary={client.general.lastName} />
                 </ListItemButton>
