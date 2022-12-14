@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 import { AppTheme } from './utils/them';
-import { ClientsListContainer, ClientId } from './components';
+import { ClientId, ClientsListContainer } from './components';
 
 const useStyles = makeStyles()((theme: AppTheme) => ({
   root: {
@@ -17,12 +17,19 @@ const useStyles = makeStyles()((theme: AppTheme) => ({
 
 const App: FC = () => {
   const { classes } = useStyles();
-  const [clientID, setClientID] = useState<number | null>(null);
+  const clientIDKey = 'clientID';
+  const saveClientID = Number(localStorage.getItem(clientIDKey));
+  const [clientID, setClientID] = useState<number | null>(saveClientID || null);
+
+  const handelSetClientID = (clientID: number): void => {
+    setClientID(clientID);
+    localStorage.setItem(clientIDKey, String(clientID));
+  };
 
   return (
     <div className={classes.root}>
       <div>
-        <ClientsListContainer setClientID={setClientID} />
+        <ClientsListContainer onSetClientID={handelSetClientID} />
       </div>
       <div className={classes.clientId}>
         <ClientId clientID={clientID} />
