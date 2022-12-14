@@ -51,10 +51,13 @@ export const ClientId: FC<Props> = ({ clientID }) => {
           </Typography>
           <Divider />
           <Typography>
-            Job: Company: {client.job.company} <br /> Title: {client.job.title} <br />
+            Job:
+            <br /> Company: {client.job.company} <br /> Title: {client.job.title} <br />
           </Typography>
           <Typography>
-            Address: Country:
+            Contact: <br /> Email: {client.contact.email} <br /> Phone: {client.contact.phone} <br />
+            Address: <br />
+            Country:
             {client.address.country} <br /> City: {client.address.city} <br /> Street: {client.address.street}
             <br /> Zip code: {client.address.zipCode}
           </Typography>
