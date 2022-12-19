@@ -29,7 +29,7 @@ const App: FC = () => {
   return (
     <div className={classes.root}>
       <div>
-        <ClientsListContainer onSetClientID={handelSetClientID} />
+        <ClientsListContainer clientID={clientID} onSetClientID={handelSetClientID} />
       </div>
       <div className={classes.clientId}>
         <ClientId clientID={clientID} />
