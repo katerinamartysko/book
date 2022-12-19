@@ -1,57 +1,69 @@
 import React, { FC } from 'react';
-import { Avatar, Breadcrumbs, Divider, List, ListItemButton, ListItemText, ListSubheader } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
+import { Avatar, Typography } from '@mui/material';
 import { theme } from '../utils/them';
 import { ClientList as IClientList } from '../api/types';
-
-interface Props {
-  clients: Array<IClientList>;
-  onSetClientID: (clientID: number) => void;
-}
+import classNames from 'classnames';
 
 const useStyles = makeStyles()(() => ({
   list: {
     display: 'flex',
     flexDirection: 'row',
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+    borderRight: '1px solid #808080 ',
+    borderBottom: '1px solid #808080 ',
+  },
+  listActive: {
+    borderRight: 'none',
+    borderBottom: '2px solid #808088 ',
+    borderTop: '1px solid #808088 ',
   },
   load: {
     justifyContent: 'center',
   },
   avatar: {
-    width: theme.spacing(5),
-    height: theme.spacing(5),
+    background: 'red',
   },
   divider: {
     marginLeft: theme.spacing(5),
   },
+  nameContainer: {
+    alignSelf: 'center',
+    display: 'flex',
+  },
+  name: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
-export const ClientList: FC<Props> = ({ clients, onSetClientID }) => {
+interface Props {
+  clients: Array<IClientList>;
+  clientID: number | null;
+  onSetClientID: (clientID: number) => void;
+}
+
+export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
   const { classes } = useStyles();
 
   if (!clients.length) return <h1> No clients found </h1>;
   return (
     <div>
-      <Breadcrumbs aria-label="breadcrumb">
-        <List
-          component="nav"
-          aria-label="mailbox folders"
-          subheader={<ListSubheader component="div">Phone book</ListSubheader>}
+      <Typography>Phone book</Typography>
+      {clients.map(client => (
+        <div
+          key={client.id}
+          className={classNames(classes.list, { [classes.listActive]: clientID === client.id })}
+          onClick={() => onSetClientID(client.id)}
         >
-          {clients.map(client => (
-            <div key={client.id}>
-              <div className={classes.list}>
-                <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar} />
-                <ListItemButton onClick={() => onSetClientID(client.id)}>
-                  <ListItemText primary={client.general.firstName} />
-                  <ListItemText primary={client.general.lastName} />
-                </ListItemButton>
-              </div>
-              <Divider className={classes.divider} />
-            </div>
-          ))}
-        </List>
-      </Breadcrumbs>
+          <Avatar alt={client.general.firstName} src={client.general.avatar} className={classes.avatar} />
+          <div className={classes.nameContainer}>
+            <Typography className={classes.name}>{client.general.firstName}</Typography>
+            &nbsp;
+            <Typography>{client.general.lastName} </Typography>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
