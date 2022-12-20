@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { makeStyles } from 'tss-react/mui';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Avatar, Typography } from '@mui/material';
 import { theme } from '../utils/them';
 import { ClientList as IClientList } from '../api/types';
@@ -7,6 +8,7 @@ import classNames from 'classnames';
 
 const useStyles = makeStyles()(() => ({
   list: {
+    cursor: 'pointer',
     display: 'flex',
     flexDirection: 'row',
     paddingTop: theme.spacing(1),
@@ -16,8 +18,8 @@ const useStyles = makeStyles()(() => ({
   },
   listActive: {
     borderRight: 'none',
-    borderBottom: '2px solid #808088 ',
-    borderTop: '1px solid #808088 ',
+    borderBottom: '3px solid #808088 ',
+    borderTop: '2px solid #808088 ',
   },
   load: {
     justifyContent: 'center',
@@ -35,6 +37,10 @@ const useStyles = makeStyles()(() => ({
   name: {
     marginLeft: theme.spacing(1),
   },
+  scroll: {
+    width: '240px',
+    height: '5000px',
+  },
 }));
 
 interface Props {
@@ -49,21 +55,25 @@ export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
   if (!clients.length) return <h1> No clients found </h1>;
   return (
     <div>
-      <Typography>Phone book</Typography>
-      {clients.map(client => (
-        <div
-          key={client.id}
-          className={classNames(classes.list, { [classes.listActive]: clientID === client.id })}
-          onClick={() => onSetClientID(client.id)}
-        >
-          <Avatar alt={client.general.firstName} src={client.general.avatar} className={classes.avatar} />
-          <div className={classes.nameContainer}>
-            <Typography className={classes.name}>{client.general.firstName}</Typography>
-            &nbsp;
-            <Typography>{client.general.lastName} </Typography>
-          </div>
+      <Scrollbars style={{ width: 240, height: 1200 }}>
+        <Typography>Phone book</Typography>
+        <div>
+          {clients.map(client => (
+            <div
+              key={client.id}
+              className={classNames(classes.list, { [classes.listActive]: clientID === client.id })}
+              onClick={() => onSetClientID(client.id)}
+            >
+              <Avatar alt={client.general.firstName} src={client.general.avatar} className={classes.avatar} />
+              <div className={classes.nameContainer}>
+                <Typography className={classes.name}>{client.general.firstName}</Typography>
+                &nbsp;
+                <Typography>{client.general.lastName} </Typography>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </Scrollbars>
     </div>
   );
 };
