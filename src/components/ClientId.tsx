@@ -4,18 +4,23 @@ import { Avatar, Box, CircularProgress, Divider, Typography } from '@mui/materia
 import { makeStyles } from 'tss-react/mui';
 import { selectClientId } from '../store/clients/selectors';
 import { getClientId } from '../store/clients/actions';
+import { theme, getFirstLetters } from '../utils';
 import PostService from '../api/PostServise';
 import { useFetching } from '../hooks';
-import { theme } from '../utils/them';
 
 interface Props {
   clientID: number | null;
 }
 const useStyles = makeStyles()(() => ({
+  root: {
+    overflow: 'hidden',
+    height: '100%',
+  },
   avatar: {
     width: theme.spacing(20),
     height: theme.spacing(20),
     marginRight: theme.spacing(5),
+    background: 'pink',
   },
   details: {
     display: 'flex',
@@ -39,11 +44,11 @@ export const ClientId: FC<Props> = ({ clientID }) => {
 
   if (!client) return null;
   return (
-    <div>
+    <div className={classes.root}>
       <div className={classes.details}>
-        <div>
-          <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar} />
-        </div>
+        <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
+          {getFirstLetters(client.general)}
+        </Avatar>
         <div>
           <Typography>
             Name:

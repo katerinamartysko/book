@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { makeStyles } from 'tss-react/mui';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Avatar, Typography } from '@mui/material';
-import { theme } from '../utils/them';
-import { ClientList as IClientList } from '../api/types';
 import classNames from 'classnames';
+import { ClientList as IClientList } from '../api/types';
+import { theme, getFirstLetters } from '../utils';
 
 const useStyles = makeStyles()(() => ({
   list: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles()(() => ({
     justifyContent: 'center',
   },
   avatar: {
-    background: 'red',
+    background: 'pink',
   },
   divider: {
     marginLeft: theme.spacing(5),
@@ -64,7 +64,9 @@ export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
               className={classNames(classes.list, { [classes.listActive]: clientID === client.id })}
               onClick={() => onSetClientID(client.id)}
             >
-              <Avatar alt={client.general.firstName} src={client.general.avatar} className={classes.avatar} />
+              <Avatar alt={client.general.firstName} src={client.general.avatar} className={classes.avatar}>
+                {getFirstLetters(client.general)}
+              </Avatar>
               <div className={classes.nameContainer}>
                 <Typography className={classes.name}>{client.general.firstName}</Typography>
                 &nbsp;
