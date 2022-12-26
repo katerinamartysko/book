@@ -10,6 +10,9 @@ import { Search } from './Search';
 import { ClientList } from './ClientList';
 
 const useStyles = makeStyles()(() => ({
+  root: {
+    height: '100%',
+  },
   load: {
     justifyContent: 'center',
   },
@@ -43,7 +46,7 @@ export const ClientsListContainer: FC<Props> = ({ clientID, onSetClientID }) => 
   if (isClientsLoading) return <CircularProgress className={classes.load} />;
   if (clientError) return <h1 className="error">Произошла ошибка {clientError}</h1>;
   return (
-    <div>
+    <div className={classes.root}>
       <Search search={search} onSearch={handelSearch} />
       <ClientList clientID={clientID} clients={clients} onSetClientID={onSetClientID} />
     </div>

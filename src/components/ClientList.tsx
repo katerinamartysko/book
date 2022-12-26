@@ -38,8 +38,7 @@ const useStyles = makeStyles()(() => ({
     marginLeft: theme.spacing(1),
   },
   scroll: {
-    width: '240px',
-    height: '5000px',
+    height: 'calc(100% - 56px)',
   },
 }));
 
@@ -54,28 +53,26 @@ export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
 
   if (!clients.length) return <h1> No clients found </h1>;
   return (
-    <div>
-      <Scrollbars style={{ width: 240, height: 1200 }}>
-        <Typography>Phone book</Typography>
-        <div>
-          {clients.map(client => (
-            <div
-              key={client.id}
-              className={classNames(classes.list, { [classes.listActive]: clientID === client.id })}
-              onClick={() => onSetClientID(client.id)}
-            >
-              <Avatar alt={client.general.firstName} src={client.general.avatar} className={classes.avatar}>
-                {getFirstLetters(client.general)}
-              </Avatar>
-              <div className={classes.nameContainer}>
-                <Typography className={classes.name}>{client.general.firstName}</Typography>
-                &nbsp;
-                <Typography>{client.general.lastName} </Typography>
-              </div>
+    <Scrollbars style={{ height: 'calc(100% - 56px)' }}>
+      <Typography>Phone book</Typography>
+      <div>
+        {clients.map(client => (
+          <div
+            key={client.id}
+            className={classNames(classes.list, { [classes.listActive]: clientID === client.id })}
+            onClick={() => onSetClientID(client.id)}
+          >
+            <Avatar alt={client.general.firstName} src={client.general.avatar} className={classes.avatar}>
+              {getFirstLetters(client.general)}
+            </Avatar>
+            <div className={classes.nameContainer}>
+              <Typography className={classes.name}>{client.general.firstName}</Typography>
+              &nbsp;
+              <Typography>{client.general.lastName} </Typography>
             </div>
-          ))}
-        </div>
-      </Scrollbars>
-    </div>
+          </div>
+        ))}
+      </div>
+    </Scrollbars>
   );
 };
