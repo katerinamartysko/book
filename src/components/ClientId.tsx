@@ -1,12 +1,14 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Avatar, Box, CircularProgress, Divider, Typography } from '@mui/material';
+import { Avatar, Box, CircularProgress, Divider } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import { selectClientId } from '../store/clients/selectors';
 import { getClientId } from '../store/clients/actions';
 import { theme, getFirstLetters } from '../utils';
 import PostService from '../api/PostServise';
 import { useFetching } from '../hooks';
+import { Description } from './Description';
+import { Section } from './Section';
 
 interface Props {
   clientID: number | null;
@@ -19,7 +21,7 @@ const useStyles = makeStyles()(() => ({
   avatar: {
     width: theme.spacing(20),
     height: theme.spacing(20),
-    marginRight: theme.spacing(5),
+    marginRight: theme.spacing(10),
     background: 'pink',
   },
   details: {
@@ -50,24 +52,25 @@ export const ClientId: FC<Props> = ({ clientID }) => {
           {getFirstLetters(client.general)}
         </Avatar>
         <div>
-          <Typography>
-            Name:
-            {client.general.firstName} {client.general.lastName}
-          </Typography>
+          <Description bolt={true} title="Name" value={`${client.general.firstName} ${client.general.lastName}`} />
           <Divider />
-          <Typography>
-            Job:
-            <br /> Company: {client.job.company} <br /> Title: {client.job.title} <br />
-          </Typography>
-          <Typography>
-            Contact: <br /> Email: {client.contact.email} <br /> Phone: {client.contact.phone} <br />
-            Address: <br />
-            Country:
-            {client.address.country} <br /> City: {client.address.city} <br /> Street: {client.address.street}
-            <br /> Zip code: {client.address.zipCode}
-          </Typography>
+          <Section title="Job">
+            <Description title="Company" value={client.job.company} />
+            <Description title="Title" value={client.job.title} />
+          </Section>
+          <Section title="Contact">
+            <Description title="Phone" value={client.contact.phone} />
+            <Description title="Email" value={client.contact.email} />
+          </Section>
+          <Section title="Address">
+            <Description title="Country" value={client.address.country} />
+            <Description title="City" value={client.address.city} />
+            <Description title="Street" value={client.address.street} />
+            <Description title="ZipCode" value={client.address.zipCode} />
+          </Section>
         </div>
       </div>
+
       {clientIdError && <h1 className="error">Произошла ошибка {clientIdError}</h1>}
       {isClientIdLoading && (
         <Box sx={{ display: 'flex' }}>

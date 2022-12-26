@@ -26,6 +26,7 @@ const useStyles = makeStyles()(() => ({
   },
   avatar: {
     background: 'pink',
+    marginLeft: theme.spacing(0.7),
   },
   divider: {
     marginLeft: theme.spacing(5),
