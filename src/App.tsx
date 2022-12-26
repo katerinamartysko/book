@@ -1,3 +1,4 @@
+import { GlobalStyles } from '@mui/material';
 import React, { FC, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 import { ClientId, ClientsListContainer } from './components';
@@ -5,6 +6,7 @@ import { AppTheme } from './utils';
 
 const useStyles = makeStyles()((theme: AppTheme) => ({
   root: {
+    height: '100%',
     display: 'flex',
     flexDirection: 'row',
   },
@@ -28,6 +30,34 @@ const App: FC = () => {
 
   return (
     <div className={classes.root}>
+      <GlobalStyles
+        styles={() => ({
+          '*': {
+            margin: 0,
+            padding: 0,
+            boxSizing: 'border-box',
+            fontFamily: 'Open Sans',
+          },
+          html: {
+            '-webkit-font-smoothing': 'antialiased',
+            '-moz-osx-font-smoothing': 'grayscale',
+            height: '100%',
+            width: '100%',
+          },
+          body: {
+            height: '100%',
+            width: '100%',
+          },
+          '#root': {
+            height: '100%',
+            width: '100%',
+          },
+          a: {
+            textDecoration: 'none',
+            color: 'lightblue',
+          },
+        })}
+      />
       <div>
         <ClientsListContainer clientID={clientID} onSetClientID={handelSetClientID} />
       </div>
