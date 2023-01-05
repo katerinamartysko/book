@@ -40,6 +40,7 @@ const useStyles = makeStyles()(() => ({
   },
   scroll: {
     height: 'calc(100% - 56px)',
+    width: '100%',
   },
 }));
 
@@ -54,7 +55,7 @@ export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
 
   if (!clients.length) return <h1> No clients found </h1>;
   return (
-    <Scrollbars style={{ height: 'calc(100% - 56px)' }}>
+    <Scrollbars className={classes.scroll}>
       <Typography>Phone book</Typography>
       <div>
         {clients.map(client => (
