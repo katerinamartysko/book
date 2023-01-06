@@ -1,13 +1,13 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Avatar, Box, CircularProgress, Divider } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
+import { Avatar, Box, CircularProgress, Divider, useMediaQuery } from '@mui/material';
 import { selectClientId } from '../store/clients/selectors';
 import { getClientId } from '../store/clients/actions';
 import { theme, getFirstLetters } from '../utils';
 import PostService from '../api/PostServise';
-import { useFetching } from '../hooks';
 import { Description } from './Description';
+import { useFetching } from '../hooks';
 import { Section } from './Section';
 
 interface Props {
@@ -17,14 +17,27 @@ const useStyles = makeStyles()(() => ({
   root: {
     overflow: 'hidden',
     height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    justifyContent: 'center',
   },
   avatar: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+    width: '160px',
+    height: '160px',
     marginRight: theme.spacing(10),
     background: 'pink',
+    [theme.breakpoints.down('md')]: {
+      marginBottom: theme.spacing(2),
+    },
   },
   details: {
+    display: 'flex',
+    [theme.breakpoints.down('md')]: {
+      display: 'block',
+    },
+  },
+  box: {
     display: 'flex',
   },
 }));
@@ -33,6 +46,7 @@ export const ClientId: FC<Props> = ({ clientID }) => {
   const dispatch = useDispatch();
   const { classes } = useStyles();
   const client = useSelector(selectClientId);
+  const showClientID = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [fetchClientsById, isClientIdLoading, clientIdError] = useFetching(async (id: number) => {
     const response = await PostService.getClientId(id);
@@ -44,13 +58,15 @@ export const ClientId: FC<Props> = ({ clientID }) => {
     fetchClientsById(clientID);
   }, [clientID]);
 
-  if (!client) return null;
+  if (!client || !showClientID) return null;
   return (
     <div className={classes.root}>
       <div className={classes.details}>
-        <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
-          {getFirstLetters(client.general)}
-        </Avatar>
+        <div>
+          <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
+            {getFirstLetters(client.general)}
+          </Avatar>
+        </div>
         <div>
           <Description bolt={true} title="Name" value={`${client.general.firstName} ${client.general.lastName}`} />
           <Divider />
@@ -73,7 +89,7 @@ export const ClientId: FC<Props> = ({ clientID }) => {
 
       {clientIdError && <h1 className="error">Произошла ошибка {clientIdError}</h1>}
       {isClientIdLoading && (
-        <Box sx={{ display: 'flex' }}>
+        <Box className={classes.box}>
           <CircularProgress />
         </Box>
       )}

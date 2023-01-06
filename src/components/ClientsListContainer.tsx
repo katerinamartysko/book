@@ -8,10 +8,26 @@ import { useFetching, useDebouncedCallback } from '../hooks';
 import PostService from '../api/PostServise';
 import { ClientList } from './ClientList';
 import { Search } from './Search';
+import { theme } from '../utils';
 
 const useStyles = makeStyles()(() => ({
   root: {
     height: '100%',
+    [theme.breakpoints.up('xs')]: {
+      width: '100%',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '210px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '220px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '220px',
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: '100px',
+    },
   },
   load: {
     justifyContent: 'center',

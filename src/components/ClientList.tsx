@@ -11,10 +11,14 @@ const useStyles = makeStyles()(() => ({
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'row',
+    width: '100%',
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     borderRight: '1px solid #808080 ',
     borderBottom: '1px solid #808080 ',
+    [theme.breakpoints.up('xs')]: {
+      fontSize: '38px',
+    },
   },
   listActive: {
     borderRight: 'none',
@@ -40,7 +44,6 @@ const useStyles = makeStyles()(() => ({
   },
   scroll: {
     height: 'calc(100% - 56px)',
-    width: '100%',
   },
 }));
 
