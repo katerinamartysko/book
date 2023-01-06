@@ -22,11 +22,16 @@ const App: FC = () => {
     localStorage.setItem(clientIDKey, String(clientID));
   };
 
+  const handleRemoveClientID = (): void => {
+    setClientID(null);
+    localStorage.removeItem(clientIDKey);
+  };
+
   return (
     <div className={classes.root}>
       <GlobalLayout />
       <ClientsListContainer clientID={clientID} onSetClientID={handelSetClientID} />
-      <ClientId clientID={clientID} />
+      <ClientId clientID={clientID} onRemoveClientID={handleRemoveClientID} />
     </div>
   );
 };

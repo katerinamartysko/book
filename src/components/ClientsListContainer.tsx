@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
-import { CircularProgress } from '@mui/material';
-import { selectClientsList, selectSearch } from '../store/clients/selectors';
+import { CircularProgress, useMediaQuery } from '@mui/material';
+import { selectClient, selectClientsList, selectSearch } from '../store/clients/selectors';
 import { getClientsList, setSearch } from '../store/clients/actions';
 import { useFetching, useDebouncedCallback } from '../hooks';
 import PostService from '../api/PostServise';
@@ -45,7 +45,10 @@ export const ClientsListContainer: FC<Props> = ({ clientID, onSetClientID }) => 
 
   const clients = useSelector(selectClientsList);
   const search = useSelector(selectSearch);
+  const client = useSelector(selectClient);
+
   const [clientSearch, setClientSearch] = useState<string | null>(search);
+  const isHideClientsList = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [fetchClients, isClientsLoading, clientError] = useFetching(async () => {
     const response = await PostService.getClients();
@@ -65,6 +68,7 @@ export const ClientsListContainer: FC<Props> = ({ clientID, onSetClientID }) => 
     searchClients(search);
   };
 
+  if (client && isHideClientsList) return null;
   if (isClientsLoading) return <CircularProgress className={classes.load} />;
   if (clientError) return <h1 className="error">Произошла ошибка {clientError}</h1>;
   return (
