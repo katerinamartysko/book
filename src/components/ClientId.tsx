@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
-import { Avatar, Box, Button, CircularProgress, Divider } from '@mui/material';
+import { Avatar, Box, CircularProgress, Divider } from '@mui/material';
 import { selectClient } from '../store/clients/selectors';
 import { getClient, removeClient } from '../store/clients/actions';
 import { theme, getFirstLetters } from '../utils';
@@ -9,6 +9,7 @@ import PostService from '../api/PostServise';
 import { Description } from './Description';
 import { useFetching } from '../hooks';
 import { Section } from './Section';
+import { BackButton } from './index';
 
 const useStyles = makeStyles()(() => ({
   root: {
@@ -64,42 +65,42 @@ export const ClientId: FC<Props> = ({ clientID, onRemoveClientID }) => {
 
   if (!client) return null;
   return (
-    <div className={classes.root}>
-      <Button variant="outlined" onClick={onRemoveClientID}>
-        Back
-      </Button>
-      <div className={classes.details}>
-        <div>
-          <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
-            {getFirstLetters(client.general)}
-          </Avatar>
+    <>
+      <BackButton onRemoveClientID={onRemoveClientID} />
+      <div className={classes.root}>
+        <div className={classes.details}>
+          <div>
+            <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
+              {getFirstLetters(client.general)}
+            </Avatar>
+          </div>
+          <div>
+            <Description bolt={true} title="Name" value={`${client.general.firstName} ${client.general.lastName}`} />
+            <Divider />
+            <Section title="Job">
+              <Description title="Company" value={client.job.company} />
+              <Description title="Title" value={client.job.title} />
+            </Section>
+            <Section title="Contact">
+              <Description title="Phone" value={client.contact.phone} />
+              <Description title="Email" value={client.contact.email} />
+            </Section>
+            <Section title="Address">
+              <Description title="Country" value={client.address.country} />
+              <Description title="City" value={client.address.city} />
+              <Description title="Street" value={client.address.street} />
+              <Description title="ZipCode" value={client.address.zipCode} />
+            </Section>
+          </div>
         </div>
-        <div>
-          <Description bolt={true} title="Name" value={`${client.general.firstName} ${client.general.lastName}`} />
-          <Divider />
-          <Section title="Job">
-            <Description title="Company" value={client.job.company} />
-            <Description title="Title" value={client.job.title} />
-          </Section>
-          <Section title="Contact">
-            <Description title="Phone" value={client.contact.phone} />
-            <Description title="Email" value={client.contact.email} />
-          </Section>
-          <Section title="Address">
-            <Description title="Country" value={client.address.country} />
-            <Description title="City" value={client.address.city} />
-            <Description title="Street" value={client.address.street} />
-            <Description title="ZipCode" value={client.address.zipCode} />
-          </Section>
-        </div>
-      </div>
 
-      {clientIdError && <h1 className="error">Произошла ошибка {clientIdError}</h1>}
-      {isClientIdLoading && (
-        <Box className={classes.box}>
-          <CircularProgress />
-        </Box>
-      )}
-    </div>
+        {clientIdError && <h1 className="error">Произошла ошибка {clientIdError}</h1>}
+        {isClientIdLoading && (
+          <Box className={classes.box}>
+            <CircularProgress />
+          </Box>
+        )}
+      </div>
+    </>
   );
 };
