@@ -3,18 +3,22 @@ import { makeStyles } from 'tss-react/mui';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Avatar, Typography } from '@mui/material';
 import classNames from 'classnames';
-import { ClientList as IClientList } from '../api/types';
 import { theme, getFirstLetters } from '../utils';
+import { ClientList as IClientList } from '../api/types';
 
 const useStyles = makeStyles()(() => ({
   list: {
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'row',
+    width: '100%',
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     borderRight: '1px solid #808080 ',
     borderBottom: '1px solid #808080 ',
+    [theme.breakpoints.up('xs')]: {
+      fontSize: '38px',
+    },
   },
   listActive: {
     borderRight: 'none',
@@ -32,7 +36,7 @@ const useStyles = makeStyles()(() => ({
     marginLeft: theme.spacing(5),
   },
   nameContainer: {
-    alignSelf: 'center',
+    alignItems: 'center',
     display: 'flex',
   },
   name: {
@@ -54,8 +58,7 @@ export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
 
   if (!clients.length) return <h1> No clients found </h1>;
   return (
-    <Scrollbars style={{ height: 'calc(100% - 56px)' }}>
-      <Typography>Phone book</Typography>
+    <Scrollbars className={classes.scroll}>
       <div>
         {clients.map(client => (
           <div

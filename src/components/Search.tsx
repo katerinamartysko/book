@@ -6,6 +6,21 @@ import { theme } from '../utils';
 const useStyles = makeStyles()(() => ({
   search: {
     marginTop: theme.spacing(1),
+    [theme.breakpoints.up('xs')]: {
+      width: 'calc(100% - 20px)',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '205px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '215px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '215px',
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: '225px',
+    },
   },
 }));
 
