@@ -2,14 +2,14 @@ import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
 import { Avatar, Box, CircularProgress, Divider } from '@mui/material';
-import { selectClient } from '../store/clients/selectors';
 import { getClient, removeClient } from '../store/clients/actions';
+import { selectClient } from '../store/clients/selectors';
 import { theme, getFirstLetters } from '../utils';
 import PostService from '../api/PostServise';
 import { Description } from './Description';
 import { useFetching } from '../hooks';
-import { Section } from './Section';
 import { BackButton } from './index';
+import { Section } from './Section';
 
 const useStyles = makeStyles()(() => ({
   root: {
@@ -69,11 +69,9 @@ export const ClientId: FC<Props> = ({ clientID, onRemoveClientID }) => {
       <BackButton onRemoveClientID={onRemoveClientID} />
       <div className={classes.root}>
         <div className={classes.details}>
-          <div>
-            <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
-              {getFirstLetters(client.general)}
-            </Avatar>
-          </div>
+          <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
+            {getFirstLetters(client.general)}
+          </Avatar>
           <div>
             <Description bolt={true} title="Name" value={`${client.general.firstName} ${client.general.lastName}`} />
             <Divider />
