@@ -3,8 +3,8 @@ import { makeStyles } from 'tss-react/mui';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Avatar, Typography } from '@mui/material';
 import classNames from 'classnames';
-import { ClientList as IClientList } from '../api/types';
 import { theme, getFirstLetters } from '../utils';
+import { ClientList as IClientList } from '../api/types';
 
 const useStyles = makeStyles()(() => ({
   list: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles()(() => ({
     marginLeft: theme.spacing(5),
   },
   nameContainer: {
-    alignSelf: 'center',
+    alignItems: 'center',
     display: 'flex',
   },
   name: {
@@ -59,7 +59,6 @@ export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
   if (!clients.length) return <h1> No clients found </h1>;
   return (
     <Scrollbars className={classes.scroll}>
-      <Typography>Phone book</Typography>
       <div>
         {clients.map(client => (
           <div

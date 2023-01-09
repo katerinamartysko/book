@@ -7,7 +7,7 @@ const useStyles = makeStyles()(() => ({
   search: {
     marginTop: theme.spacing(1),
     [theme.breakpoints.up('xs')]: {
-      width: '100%',
+      width: 'calc(100% - 20px)',
     },
     [theme.breakpoints.up('sm')]: {
       width: '205px',

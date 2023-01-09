@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
-import { CircularProgress, useMediaQuery } from '@mui/material';
+import { CircularProgress, Typography, useMediaQuery } from '@mui/material';
 import { selectClient, selectClientsList, selectSearch } from '../store/clients/selectors';
 import { getClientsList, setSearch } from '../store/clients/actions';
 import { useFetching, useDebouncedCallback } from '../hooks';
@@ -15,6 +15,7 @@ const useStyles = makeStyles()(() => ({
     height: '100%',
     [theme.breakpoints.up('xs')]: {
       width: '100%',
+      flexDirection: 'row-reverse',
     },
     [theme.breakpoints.up('sm')]: {
       width: '210px',
@@ -74,6 +75,7 @@ export const ClientsListContainer: FC<Props> = ({ clientID, onSetClientID }) => 
   return (
     <div className={classes.root}>
       <Search search={clientSearch} onSearch={handelSearch} />
+      <Typography>Phone book</Typography>
       <ClientList clientID={clientID} clients={clients} onSetClientID={onSetClientID} />
     </div>
   );
