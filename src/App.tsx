@@ -7,7 +7,6 @@ const useStyles = makeStyles()(() => ({
     height: '100%',
     width: '100%',
     display: 'flex',
-    justifyContent: 'center',
   },
 }));
 
@@ -17,9 +16,13 @@ const App: FC = () => {
   const saveClientID = Number(localStorage.getItem(clientIDKey));
   const [clientID, setClientID] = useState<number | null>(saveClientID || null);
 
-  const handelSetClientID = (clientID: number): void => {
-    setClientID(clientID);
-    localStorage.setItem(clientIDKey, String(clientID));
+  const handelSetClientID = (selectedClientID: number): void => {
+    if (selectedClientID === clientID) {
+      handleRemoveClientID();
+      return;
+    }
+    setClientID(selectedClientID);
+    localStorage.setItem(clientIDKey, String(selectedClientID));
   };
 
   const handleRemoveClientID = (): void => {
