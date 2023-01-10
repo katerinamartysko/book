@@ -1,8 +1,8 @@
-import { GetClientsAction, GetClientsIdAction, Search } from './actions';
+import { GetClientsAction, GetClientsIdAction, RemoveClientsIdAction, Search } from './actions';
 import { Client, ClientList } from '../../api/types';
 import c from '../constants';
 
-type ClientsActions = GetClientsAction | GetClientsIdAction | Search;
+type ClientsActions = GetClientsAction | GetClientsIdAction | RemoveClientsIdAction | Search;
 
 export interface ClientsState {
   clientsList: Array<ClientList>;
@@ -25,13 +25,22 @@ export const clientsReducer = (state = INITIAL_STATE, action: ClientsActions): C
         clientsList: [...state.clientsList, ...clientsList],
       };
     }
-    case c.GET_CLIENT_ID: {
+
+    case c.GET_CLIENT: {
       const currentClient = action.payload;
       return {
         ...state,
         currentClient,
       };
     }
+
+    case c.REMOVE_CLIENT: {
+      return {
+        ...state,
+        currentClient: null,
+      };
+    }
+
     case c.SEARCH: {
       const search = action.payload;
       return {
