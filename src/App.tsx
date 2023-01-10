@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
-import { ClientId, ClientsListContainer, GlobalLayout } from './components';
+import { Client, ClientsListContainer, GlobalLayout } from './components';
 
 const useStyles = makeStyles()(() => ({
   root: {
@@ -34,7 +34,7 @@ const App: FC = () => {
     <div className={classes.root}>
       <GlobalLayout />
       <ClientsListContainer clientID={clientID} onSetClientID={handelSetClientID} />
-      <ClientId clientID={clientID} onRemoveClientID={handleRemoveClientID} />
+      <Client clientID={clientID} onRemoveClientID={handleRemoveClientID} />
     </div>
   );
 };

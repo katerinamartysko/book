@@ -3,7 +3,7 @@ interface GetFirstLetters {
   lastName: string;
 }
 
-export const getFirstLetters = (general: GetFirstLetters): string => {
-  if (general.firstName) return `${general.firstName[0]}${general.lastName[0]}`;
-  return general.lastName[0];
+export const getFirstLetters = ({ firstName, lastName }: GetFirstLetters): string => {
+  if (firstName) return `${firstName[0]}${lastName[0]}`;
+  return lastName[0];
 };

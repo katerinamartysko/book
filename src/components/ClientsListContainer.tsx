@@ -72,7 +72,7 @@ export const ClientsListContainer: FC<Props> = ({ clientID, onSetClientID }) => 
   return (
     <div className={classes.root}>
       <Search search={clientSearch} onSearch={handelSearch} />
-      <Typography>Phone book</Typography>
+      <Typography>CLIENT LIST</Typography>
       <ClientList clientID={clientID} clients={clients} onSetClientID={onSetClientID} />
     </div>
   );

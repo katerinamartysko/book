@@ -67,7 +67,7 @@ export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
             onClick={() => onSetClientID(client.id)}
           >
             <Avatar alt={client.general.firstName} src={client.general.avatar} className={classes.avatar}>
-              {getFirstLetters(client.general)}
+              {getFirstLetters({ firstName: client.general.firstName, lastName: client.general.lastName })}
             </Avatar>
             <div className={classes.nameContainer}>
               <Typography className={classes.name}>{client.general.firstName}</Typography>

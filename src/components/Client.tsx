@@ -45,7 +45,7 @@ interface Props {
   onRemoveClientID: () => void;
 }
 
-export const ClientId: FC<Props> = ({ clientID, onRemoveClientID }) => {
+export const Client: FC<Props> = ({ clientID, onRemoveClientID }) => {
   const dispatch = useDispatch();
   const { classes } = useStyles();
   const client = useSelector(selectClient);
@@ -70,7 +70,7 @@ export const ClientId: FC<Props> = ({ clientID, onRemoveClientID }) => {
       <div className={classes.root}>
         <div className={classes.details}>
           <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
-            {getFirstLetters(client.general)}
+            {getFirstLetters({ firstName: client.general.firstName, lastName: client.general.lastName })}
           </Avatar>
           <div>
             <Description bolt={true} title="Name" value={`${client.general.firstName} ${client.general.lastName}`} />
