@@ -11,10 +11,10 @@ export const selectClientsList: Selector<State, Array<ClientList>> = createSelec
     if (search === null) return clientsList;
     return clientsList.filter(
       client =>
-        client.general.firstName.toLowerCase().includes(search.toLowerCase()) ||
+        client.general.firstName?.toLowerCase().includes(search.toLowerCase()) ||
         client.general.lastName.toLowerCase().includes(search.toLowerCase())
     );
   }
 );
 
-export const selectClientId = (state: State): Client | null => state.clientsReducer.currentClient;
+export const selectClient = (state: State): Client | null => state.clientsReducer.currentClient;
