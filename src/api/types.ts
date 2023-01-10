@@ -1,5 +1,5 @@
 export interface General {
-  firstName: string;
+  firstName?: string;
   lastName: string;
   avatar: string;
 }

@@ -1,32 +1,40 @@
 import React, { FC, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
-import { AppTheme } from './utils/them';
-import { ClientsListContainer, ClientId } from './components';
+import { Client, ClientsListContainer, GlobalLayout } from './components';
 
-const useStyles = makeStyles()((theme: AppTheme) => ({
+const useStyles = makeStyles()(() => ({
   root: {
+    height: '100%',
+    width: '100%',
     display: 'flex',
-    flexDirection: 'row',
-  },
-  clientId: {
-    marginLeft: theme.spacing(25),
-    marginTop: theme.spacing(20),
-    justifyContent: 'center',
   },
 }));
 
 const App: FC = () => {
   const { classes } = useStyles();
-  const [clientID, setClientID] = useState<number | null>(null);
+  const clientIDKey = 'clientID';
+  const saveClientID = Number(localStorage.getItem(clientIDKey));
+  const [clientID, setClientID] = useState<number | null>(saveClientID || null);
+
+  const handelSetClientID = (selectedClientID: number): void => {
+    if (selectedClientID === clientID) {
+      handleRemoveClientID();
+      return;
+    }
+    setClientID(selectedClientID);
+    localStorage.setItem(clientIDKey, String(selectedClientID));
+  };
+
+  const handleRemoveClientID = (): void => {
+    setClientID(null);
+    localStorage.removeItem(clientIDKey);
+  };
 
   return (
     <div className={classes.root}>
-      <div>
-        <ClientsListContainer setClientID={setClientID} />
-      </div>
-      <div className={classes.clientId}>
-        <ClientId clientID={clientID} />
-      </div>
+      <GlobalLayout />
+      <ClientsListContainer clientID={clientID} onSetClientID={handelSetClientID} />
+      <Client clientID={clientID} onRemoveClientID={handleRemoveClientID} />
     </div>
   );
 };
