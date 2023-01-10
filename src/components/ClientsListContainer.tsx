@@ -60,8 +60,8 @@ export const ClientsListContainer: FC<Props> = ({ clientID, onSetClientID }) => 
     searchClients(search);
   };
 
-  if (client && isHideClientsList) return null;
   if (isClientsLoading) return <CircularProgress className={classes.load} />;
+  if (client && isHideClientsList) return null;
   if (clientError)
     return (
       <Typography variant="h1" className="error">

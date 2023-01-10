@@ -26,15 +26,17 @@ const useStyles = makeStyles()(() => ({
   avatar: {
     width: '160px',
     height: '160px',
+    fontSize: '48px',
     marginRight: theme.spacing(10),
     background: 'pink',
     [theme.breakpoints.down('md')]: {
-      marginBottom: theme.spacing(2),
+      margin: '25px auto',
     },
   },
   details: {
     [theme.breakpoints.down('md')]: {
       display: 'block',
+      justifyContent: 'center',
     },
   },
 }));
@@ -68,7 +70,7 @@ export const Client: FC<Props> = ({ clientID, onRemoveClientID }) => {
       <BackButton onRemoveClientID={onRemoveClientID} />
       <div className={classNames(classes.root, classes.flex)}>
         <div className={classNames(classes.details, classes.flex)}>
-          <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
+          <Avatar alt="Avatar" src={client.general.avatar} className={classes.avatar}>
             {getFirstLetters({ firstName: client.general.firstName, lastName: client.general.lastName })}
           </Avatar>
           <div>
