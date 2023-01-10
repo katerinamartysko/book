@@ -17,4 +17,4 @@ export const selectClientsList: Selector<State, Array<ClientList>> = createSelec
   }
 );
 
-export const selectClientId = (state: State): Client | null => state.clientsReducer.currentClient;
+export const selectClient = (state: State): Client | null => state.clientsReducer.currentClient;

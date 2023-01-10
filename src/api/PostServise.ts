@@ -10,7 +10,7 @@ export default class PostService {
     return axios.get(`${process.env.REACT_APP_CLIENTS}/clientsList`);
   }
 
-  static getClientId(id: number): Promise<ResponseClients<Client>> {
+  static getClient(id: number): Promise<ResponseClients<Client>> {
     return axios.get(`${process.env.REACT_APP_CLIENTS}/clients/${id}`);
   }
 }
