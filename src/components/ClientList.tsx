@@ -9,7 +9,6 @@ import { ClientList as IClientList } from '../api/types';
 const useStyles = makeStyles()(() => ({
   list: {
     cursor: 'pointer',
-    display: 'flex',
     flexDirection: 'row',
     width: '100%',
     paddingTop: theme.spacing(1),
@@ -37,13 +36,15 @@ const useStyles = makeStyles()(() => ({
   },
   nameContainer: {
     alignItems: 'center',
-    display: 'flex',
   },
   name: {
     marginLeft: theme.spacing(1),
   },
   scroll: {
     height: 'calc(100% - 56px)',
+  },
+  flex: {
+    display: 'flex',
   },
 }));
 
@@ -63,13 +64,13 @@ export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
         {clients.map(client => (
           <div
             key={client.id}
-            className={classNames(classes.list, { [classes.listActive]: clientID === client.id })}
+            className={classNames(classes.list, classes.flex, { [classes.listActive]: clientID === client.id })}
             onClick={() => onSetClientID(client.id)}
           >
             <Avatar alt={client.general.firstName} src={client.general.avatar} className={classes.avatar}>
               {getFirstLetters({ firstName: client.general.firstName, lastName: client.general.lastName })}
             </Avatar>
-            <div className={classes.nameContainer}>
+            <div className={classNames(classes.nameContainer, classes.flex)}>
               <Typography className={classes.name}>{client.general.firstName}</Typography>
               &nbsp;
               <Typography>{client.general.lastName} </Typography>

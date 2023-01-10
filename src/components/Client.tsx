@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
+import classNames from 'classnames';
 import { Avatar, Box, CircularProgress, Divider, Typography } from '@mui/material';
 import { getClient, removeClient } from '../store/clients/actions';
 import { selectClient } from '../store/clients/selectors';
@@ -15,7 +16,6 @@ const useStyles = makeStyles()(() => ({
   root: {
     overflow: 'hidden',
     height: '100%',
-    display: 'flex',
     alignItems: 'center',
     width: '100%',
     justifyContent: 'center',
@@ -30,12 +30,11 @@ const useStyles = makeStyles()(() => ({
     },
   },
   details: {
-    display: 'flex',
     [theme.breakpoints.down('md')]: {
       display: 'block',
     },
   },
-  box: {
+  flex: {
     display: 'flex',
   },
 }));
@@ -67,8 +66,8 @@ export const Client: FC<Props> = ({ clientID, onRemoveClientID }) => {
   return (
     <>
       <BackButton onRemoveClientID={onRemoveClientID} />
-      <div className={classes.root}>
-        <div className={classes.details}>
+      <div className={classNames(classes.root, classes.flex)}>
+        <div className={classNames(classes.details, classes.flex)}>
           <Avatar alt="Remy Sharp" src={client.general.avatar} className={classes.avatar}>
             {getFirstLetters({ firstName: client.general.firstName, lastName: client.general.lastName })}
           </Avatar>
@@ -98,7 +97,7 @@ export const Client: FC<Props> = ({ clientID, onRemoveClientID }) => {
           </Typography>
         )}
         {isClientIdLoading && (
-          <Box className={classes.box}>
+          <Box className={classes.flex}>
             <CircularProgress />
           </Box>
         )}
