@@ -30,7 +30,7 @@ const useStyles = makeStyles()(() => ({
     marginRight: theme.spacing(10),
     background: 'pink',
     [theme.breakpoints.down('md')]: {
-      margin: '25px auto',
+      margin: `${theme.spacing(3)} auto`,
     },
   },
   details: {
