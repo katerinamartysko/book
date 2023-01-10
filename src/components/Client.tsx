@@ -72,11 +72,7 @@ export const Client: FC<Props> = ({ clientID, onRemoveClientID }) => {
             {getFirstLetters({ firstName: client.general.firstName, lastName: client.general.lastName })}
           </Avatar>
           <div>
-            <Description
-              boltTitle={true}
-              title="Name"
-              value={`${client.general.firstName} ${client.general.lastName}`}
-            />
+            <Description boltTitle title="Name" value={`${client.general.firstName} ${client.general.lastName}`} />
             <Divider />
             <Section title="Job">
               <Description title="Company" value={client.job.company} />

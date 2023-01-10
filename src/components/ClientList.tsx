@@ -64,6 +64,7 @@ export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
       </Typography>
     );
   }
+
   return (
     <Scrollbars className={classes.scroll}>
       <div>
