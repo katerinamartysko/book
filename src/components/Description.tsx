@@ -20,17 +20,18 @@ const useStyles = makeStyles()(() => ({
 }));
 
 interface Props {
-  bolt?: boolean;
+  boltTitle?: boolean;
   title: string;
   value?: string;
 }
 
-export const Description: FC<Props> = ({ bolt, title, value }) => {
+export const Description: FC<Props> = ({ boltTitle, title, value }) => {
   const { classes } = useStyles();
+
   if (!value) return null;
   return (
     <div className={classes.root}>
-      <Typography className={classNames(classes.title, { [classes.bolt]: bolt })}>{title}:&nbsp;</Typography>
+      <Typography className={classNames(classes.title, { [classes.bolt]: boltTitle })}>{title}:&nbsp;</Typography>
       <Typography className={classes.value}>{value}</Typography>
     </div>
   );

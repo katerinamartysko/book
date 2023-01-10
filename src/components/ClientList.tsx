@@ -57,7 +57,12 @@ interface Props {
 export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
   const { classes } = useStyles();
 
-  if (!clients.length) return <h1> No clients found </h1>;
+  if (!clients.length)
+    return (
+      <Typography variant="h1" className="error">
+        Error
+      </Typography>
+    );
   return (
     <Scrollbars className={classes.scroll}>
       <div>
