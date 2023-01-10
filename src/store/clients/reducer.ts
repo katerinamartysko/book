@@ -1,17 +1,19 @@
-import { GetClientsAction, GetClientsIdAction } from './actions';
+import { GetClientsAction, GetClientsIdAction, Search } from './actions';
 import { Client, ClientList } from '../../api/types';
-import c from './constants';
+import c from '../constants';
 
-type ClientsActions = GetClientsAction | GetClientsIdAction;
+type ClientsActions = GetClientsAction | GetClientsIdAction | Search;
 
-interface ClientsState {
+export interface ClientsState {
   clientsList: Array<ClientList>;
   currentClient: Client | null;
+  search: string | null;
 }
 
 const INITIAL_STATE: ClientsState = {
   clientsList: [],
   currentClient: null,
+  search: null,
 };
 
 export const clientsReducer = (state = INITIAL_STATE, action: ClientsActions): ClientsState => {
@@ -28,6 +30,13 @@ export const clientsReducer = (state = INITIAL_STATE, action: ClientsActions): C
       return {
         ...state,
         currentClient,
+      };
+    }
+    case c.SEARCH: {
+      const search = action.payload;
+      return {
+        ...state,
+        search,
       };
     }
 

@@ -2,10 +2,10 @@ import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Box, CircularProgress, Divider, Typography } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
-import { useFetching } from '../hooks/useFetching';
+import { selectClientId } from '../store/clients/selectors';
 import { getClientId } from '../store/clients/actions';
 import PostService from '../api/PostServise';
-import { State } from '../store/store';
+import { useFetching } from '../hooks';
 import { theme } from '../utils/them';
 
 interface Props {
@@ -25,7 +25,7 @@ const useStyles = makeStyles()(() => ({
 export const ClientId: FC<Props> = ({ clientID }) => {
   const dispatch = useDispatch();
   const { classes } = useStyles();
-  const client = useSelector((state: State) => state.clients.currentClient);
+  const client = useSelector(selectClientId);
 
   const [fetchClientsById, isClientIdLoading, clientIdError] = useFetching(async (id: number) => {
     const response = await PostService.getClientId(id);
