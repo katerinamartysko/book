@@ -13,6 +13,9 @@ import { Section } from './Section';
 import { BackButton } from './index';
 
 const useStyles = makeStyles()(() => ({
+  flex: {
+    display: 'flex',
+  },
   root: {
     overflow: 'hidden',
     height: '100%',
@@ -33,9 +36,6 @@ const useStyles = makeStyles()(() => ({
     [theme.breakpoints.down('md')]: {
       display: 'block',
     },
-  },
-  flex: {
-    display: 'flex',
   },
 }));
 
@@ -72,7 +72,11 @@ export const Client: FC<Props> = ({ clientID, onRemoveClientID }) => {
             {getFirstLetters({ firstName: client.general.firstName, lastName: client.general.lastName })}
           </Avatar>
           <div>
-            <Description bolt={true} title="Name" value={`${client.general.firstName} ${client.general.lastName}`} />
+            <Description
+              boltTitle={true}
+              title="Name"
+              value={`${client.general.firstName} ${client.general.lastName}`}
+            />
             <Divider />
             <Section title="Job">
               <Description title="Company" value={client.job.company} />

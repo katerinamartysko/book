@@ -7,6 +7,9 @@ import { theme, getFirstLetters } from '../utils';
 import { ClientList as IClientList } from '../api/types';
 
 const useStyles = makeStyles()(() => ({
+  flex: {
+    display: 'flex',
+  },
   list: {
     cursor: 'pointer',
     flexDirection: 'row',
@@ -43,9 +46,6 @@ const useStyles = makeStyles()(() => ({
   scroll: {
     height: 'calc(100% - 56px)',
   },
-  flex: {
-    display: 'flex',
-  },
 }));
 
 interface Props {
@@ -57,12 +57,13 @@ interface Props {
 export const ClientList: FC<Props> = ({ clients, clientID, onSetClientID }) => {
   const { classes } = useStyles();
 
-  if (!clients.length)
+  if (!clients.length) {
     return (
       <Typography variant="h1" className="error">
         Error
       </Typography>
     );
+  }
   return (
     <Scrollbars className={classes.scroll}>
       <div>
