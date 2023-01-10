@@ -11,7 +11,6 @@ const palette = {
 
 export const theme = createTheme({
   palette,
-  components: {},
 });
 
 export type AppTheme = typeof theme;
