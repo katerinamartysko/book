@@ -20,15 +20,6 @@ const useStyles = makeStyles()(() => ({
     [theme.breakpoints.up('sm')]: {
       width: '210px',
     },
-    [theme.breakpoints.up('md')]: {
-      width: '220px',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '220px',
-    },
-    [theme.breakpoints.up('xl')]: {
-      width: '100px',
-    },
   },
   load: {
     justifyContent: 'center',
@@ -71,7 +62,13 @@ export const ClientsListContainer: FC<Props> = ({ clientID, onSetClientID }) => 
 
   if (client && isHideClientsList) return null;
   if (isClientsLoading) return <CircularProgress className={classes.load} />;
-  if (clientError) return <h1 className="error">Произошла ошибка {clientError}</h1>;
+  if (clientError)
+    return (
+      <Typography variant="h1" className="error">
+        Error
+        {clientError}
+      </Typography>
+    );
   return (
     <div className={classes.root}>
       <Search search={clientSearch} onSearch={handelSearch} />
