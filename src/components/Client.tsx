@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { makeStyles } from 'tss-react/mui';
 import classNames from 'classnames';
 import { Avatar, Box, CircularProgress, Divider, Typography } from '@mui/material';
@@ -6,7 +6,9 @@ import { theme, getFirstLetters } from '../utils';
 import { Description } from './Description';
 import { Section } from './Section';
 import { BackButton } from './index';
-import { useClient } from '../hooks/useClient';
+import { useClient } from '../hooks';
+import { useDispatch } from 'react-redux';
+import { getClient } from '../store/clients/actions';
 
 const useStyles = makeStyles()(() => ({
   flex: {
@@ -44,7 +46,13 @@ interface Props {
 
 export const Client: FC<Props> = ({ clientID, onRemoveClientID }) => {
   const { classes } = useStyles();
+  const dispatch = useDispatch();
   const { data: client, isLoading: isClientLoading, isError } = useClient(clientID);
+
+  useEffect(() => {
+    if (!client) return;
+    dispatch(getClient(client));
+  }, [client]);
 
   if (!client) return <Typography>No client</Typography>;
   return (
