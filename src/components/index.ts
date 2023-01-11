@@ -5,3 +5,4 @@ export * from './Client';
 export * from './Section';
 export * from './Search';
 export * from './BackButton';
+export * from './ClientContainer';
