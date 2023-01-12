@@ -1,14 +1,15 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { makeStyles } from 'tss-react/mui';
 import classNames from 'classnames';
 import { Avatar, Box, CircularProgress, Divider, Typography } from '@mui/material';
-import { theme, getFirstLetters } from '../utils';
+import { getFirstLetters, theme } from '../utils';
+import { ClientContextType } from '../api/types';
 import { Description } from './Description';
+import { ClientContext } from '../contex';
 import { Section } from './Section';
 import { BackButton } from './index';
-import { useClient } from '../hooks';
-import { useDispatch } from 'react-redux';
-import { getClient } from '../store/clients/actions';
+import { useQuery } from 'react-query';
+import PostService from '../api/PostServise';
 
 const useStyles = makeStyles()(() => ({
   flex: {
@@ -46,15 +47,23 @@ interface Props {
 
 export const Client: FC<Props> = ({ clientID, onRemoveClientID }) => {
   const { classes } = useStyles();
-  const dispatch = useDispatch();
-  const { data: client, isLoading: isClientLoading, isError } = useClient(clientID);
+  const {
+    data,
+    isLoading: isClientLoading,
+    isError,
+  } = useQuery(['client', clientID], () => PostService.getClient(clientID));
+  console.log(data);
+
+  const { setClient } = useContext<ClientContextType>(ClientContext);
 
   useEffect(() => {
-    if (!client) return;
-    dispatch(getClient(client));
-  }, [client]);
+    if (!data) return;
+    setClient(data.data);
+  }, [data]);
 
-  if (!client) return <Typography>No client</Typography>;
+  if (!data) return <Typography>No client</Typography>;
+
+  const client = data.data;
   return (
     <>
       {isClientLoading && (

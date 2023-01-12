@@ -1,6 +1,4 @@
-import React, { FC, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { removeClient } from '../store/clients/actions';
+import React, { FC } from 'react';
 import { Client } from './Client';
 
 interface Props {
@@ -9,15 +7,6 @@ interface Props {
 }
 
 export const ClientContainer: FC<Props> = ({ clientID, onRemoveClientID }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (clientID === null) {
-      dispatch(removeClient(null));
-      return;
-    }
-  }, [clientID]);
-
   if (!clientID) return null;
   return <Client clientID={clientID} onRemoveClientID={onRemoveClientID} />;
 };

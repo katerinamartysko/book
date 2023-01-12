@@ -1,13 +1,17 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
 import { CircularProgress, Typography, useMediaQuery } from '@mui/material';
-import { selectClient, selectSearch } from '../store/clients/selectors';
-import { useDebouncedCallback, useClientsList } from '../hooks';
+import { selectSearch } from '../store/clients/selectors';
+import { useDebouncedCallback } from '../hooks';
 import { setSearch } from '../store/clients/actions';
 import { ClientList } from './ClientList';
 import { Search } from './Search';
 import { theme } from '../utils';
+import { ClientContextType } from '../api/types';
+import { ClientContext } from '../contex';
+import { useQuery } from 'react-query';
+import PostService from '../api/PostServise';
 
 const useStyles = makeStyles()(() => ({
   root: {
@@ -35,12 +39,16 @@ export const ClientsListContainer: FC<Props> = ({ clientID, onSetClientID }) => 
   const { classes } = useStyles();
 
   const search = useSelector(selectSearch);
-  const client = useSelector(selectClient);
+  const { client } = useContext<ClientContextType>(ClientContext);
 
   const [clientSearch, setClientSearch] = useState<string | null>(search);
   const isHideClientsList = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { data: clientList, isLoading: isClientsLoading, isError } = useClientsList();
+  const {
+    data: clientList,
+    isLoading: isClientsLoading,
+    isError,
+  } = useQuery('clientList', () => PostService.getClients());
 
   const searchClients = useDebouncedCallback((search: string): void => {
     dispatch(setSearch(search));
@@ -64,7 +72,7 @@ export const ClientsListContainer: FC<Props> = ({ clientID, onSetClientID }) => 
     <div className={classes.root}>
       <Search search={clientSearch} onSearch={handelSearch} />
       <Typography>CLIENT LIST</Typography>
-      <ClientList clientID={clientID} clients={clientList} onSetClientID={onSetClientID} />
+      <ClientList clientID={clientID} clients={clientList.data} onSetClientID={onSetClientID} />
     </div>
   );
 };
