@@ -26,3 +26,7 @@ export interface Client extends ClientList {
   contact: Contact;
   address: Address;
 }
+export interface ClientContextType {
+  client: Client | null;
+  setClient: (client: Client | null) => void | undefined;
+}
