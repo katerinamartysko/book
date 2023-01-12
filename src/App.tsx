@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useState } from 'react';
+import { makeStyles } from 'tss-react/mui';
+import { Client, ClientsListContainer, GlobalLayout } from './components';
 
-function App() {
+const useStyles = makeStyles()(() => ({
+  root: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+  },
+}));
+
+const App: FC = () => {
+  const { classes } = useStyles();
+  const clientIDKey = 'clientID';
+  const saveClientID = Number(localStorage.getItem(clientIDKey));
+  const [clientID, setClientID] = useState<number | null>(saveClientID || null);
+
+  const handelSetClientID = (selectedClientID: number): void => {
+    if (selectedClientID === clientID) {
+      handleRemoveClientID();
+      return;
+    }
+    setClientID(selectedClientID);
+    localStorage.setItem(clientIDKey, String(selectedClientID));
+  };
+
+  const handleRemoveClientID = (): void => {
+    setClientID(null);
+    localStorage.removeItem(clientIDKey);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.root}>
+      <GlobalLayout />
+      <ClientsListContainer clientID={clientID} onSetClientID={handelSetClientID} />
+      <Client clientID={clientID} onRemoveClientID={handleRemoveClientID} />
     </div>
   );
-}
+};
 
 export default App;

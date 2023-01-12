@@ -1,0 +1,8 @@
+enum c {
+  GET_CLIENTS_LIST = 'GET_CLIENTS_LIST',
+  GET_CLIENT = 'GET_CLIENT',
+  REMOVE_CLIENT = 'REMOVE_CLIENT',
+  SEARCH = 'SEARCH',
+}
+
+export default c;
